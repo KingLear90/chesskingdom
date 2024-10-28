@@ -1,6 +1,6 @@
 #learn-info{
     font-weight: 400;
-    font-style: italic;
+    font-size: 1em;
     margin: 1.5em auto;
     line-height: 1.5em;
 }
@@ -121,34 +121,36 @@
 }   
 
 @media all and (min-width: 480px) {
+    #learn-info{
+        font-size: 1.1em;
+    }
     .instructions {
         width: 30em;
     }
-
     #learn-info {
         margin: 1.5em 0.7em;
     }
-
     .fen {
         width: 25em;
     }
 }
 
 @media all and (min-width: 1024px) {
+    #learn-info{
+        font-size: 1.3em;
+    }
     .instructions {
         width: 45em;
     }
-
     .textAnalysis {
         width: 40em;
         margin-left:auto;
         margin-right: auto;
     }
-
     .interpretation { 
         width: 77%;
     }
-    
+
     .fen {
         width: 38em;
     }
