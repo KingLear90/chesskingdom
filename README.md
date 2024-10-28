@@ -1,12 +1,8 @@
-# ChesskingdomReact
+# React + Vite
 
-Proyecto desarrollado en React. Cuenta con diversas secciones, dos de las cuales (Learn & Gallery) conectan con dos APIs.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-La API de la sección Gallery accede a información personificada de cada Campeón Mundial que incorporé a mockapi.io
+Currently, two official plugins are available:
 
-La API de la sección Learn accede a información considerablemente más compleja: conecta con un chess engine (motor de ajedrez) llamado Stockfish, y logra analizar un código FEN que se le otorgue. 
-Si se tiene conocimientos de ajedrez, se puede utilizar algún configurador de código FEN a partir de una posición dada, como el sitio https://www.dailychess.com/chess/chess-fen-viewer.php 
-Todo lo que debe hacerse es configurar la posición que se desea analizar y el sitio, por encima del tablero, va generando el código FEN adecuado. 
-En chesskingdom/learn, en el apartado correspondiente, se puede pegar dicho FEN y solicitar a Stockfish que indique cuál es el próximo mejor movimiento en dicha situación.
-
-Por debajo de la información suministrada por la API del engine, describí línea por línea qué es lo que devuelve, es decir, cómo "leer" la información que el engine devuelve.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
