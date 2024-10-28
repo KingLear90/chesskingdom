@@ -1,6 +1,6 @@
 import React from 'react';
 import App from '../App';
-import Cards from '../Components/Cards';
+import Cards from '../components/Cards';
 import BestMoveApi from '../components/BestMoveApi';
 import { cardsItems } from '../data/CardsItems';
 function Learn() {

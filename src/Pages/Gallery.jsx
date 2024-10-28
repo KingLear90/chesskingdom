@@ -1,8 +1,8 @@
 import React from 'react';
 import App from '../App';
 import { ChampionsList } from '../data/ChampionsList';
-import Campeones from '../Components/Campeones';
-import ChampsApi from '../Components/ChampsApi';
+import Campeones from '../components/Campeones';
+import ChampsApi from '../components/ChampsApi';
 function Gallery() {
 
   return (

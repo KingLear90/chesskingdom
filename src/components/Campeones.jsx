@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChampionsList } from '../data/ChampionsList';
+import ChampionsList from '../data/ChampionsList';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 

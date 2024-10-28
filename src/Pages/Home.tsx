@@ -1,6 +1,6 @@
 import React from 'react'
-import Features from '../Components/Features'
-import Logo from '../Components/Logo'
+import Features from '../components/Features'
+import Logo from '../components/Logo'
 import App from '../App'
 function Home () {
   let features = [     // variable features tipada para que solo pueda ser un array de objetos. 
