@@ -13,10 +13,9 @@
     margin-left:auto;
     margin-right: auto;
     width: 17em;
-    height: 28em;
+    height: 28.3rem;
     border-radius: 1%;
-    margin-bottom: 3em;
-    padding: 0.5em 0em;
+    margin-bottom: 2em;
     box-shadow: 2px 2px 0px 1px dimgrey;
 }
 
@@ -24,6 +23,7 @@
     font-size: 1.1rem;
     font-weight: 400;
     font-style: 'Karla';
+    width: 15rem;
     margin: 1em 1em;
     line-height: 1.2em;
 }
@@ -38,7 +38,8 @@
     box-shadow: 2px 2px 0px 0px black;
     border-radius: 0.7em;
     height: 2em;
-    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
 }
 
 .learn-btn:hover {
