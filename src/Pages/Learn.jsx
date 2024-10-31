@@ -1,4 +1,3 @@
-import React from 'react';
 import App from '../App';
 import Cards from '../components/Cards';
 import BestMoveApi from '../components/BestMoveApi';
@@ -10,7 +9,7 @@ function Learn() {
         <h5 id='learn-info'>En esta sección podrás encontrar diversas propuestas de aprendizaje para empezar o mejorar tu ajedrez.</h5>
         <div className='main-container'>
           <Cards cardsItems={cardsItems} />
-          <BestMoveApi />
+          <BestMoveApi /> {/* BestMoveApi conecta con la API del chess engine Stockfish */}
         </div>
       </div>
     </App>
