@@ -1,5 +1,7 @@
 import { React, useState } from 'react';
 import App from '../App';
+
+// El formulario aún no tiene validación alguna de datos, pero visualmente simula que ciertos campos son obligatorios. 
 function Contact() {
 
   const [thanks, setThanks] = useState(false) // Planteo variable de estado de tipo booleana para mostrar mensaje al recibir form.
