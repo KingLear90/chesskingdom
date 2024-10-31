@@ -1,4 +1,3 @@
-import React from 'react';
 import App from '../App';
 import { ChampionsList } from '../data/ChampionsList';
 import Campeones from '../components/Campeones';
@@ -13,7 +12,7 @@ function Gallery() {
         <div className='gallery-container'>
           <Campeones ChampionsList={ChampionsList} />
           <div>
-            <ChampsApi />
+            <ChampsApi />   {/* Se renderiza el componente ChampsApi, que conecta con la API de mockapi con datos sobre los campeones */}
           </div> 
         </div>
       </div>
