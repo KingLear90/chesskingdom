@@ -3,7 +3,7 @@ import Features from '../components/Features'
 import Logo from '../components/Logo'
 import App from '../App'
 function Home () {
-  let features = [     // variable features tipada para que solo pueda ser un array de objetos. 
+  let features: object[] = [     // variable features tipada para que solo pueda ser un array de objetos y no otra cosa. 
     {
       src: '', 
       title: "Fundamentos del ajedrez",
