@@ -1,18 +1,20 @@
-import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function Campeones( {ChampionsList} ) {
+function Campeones( {ChampionsList} /* Se recibe el array de objetos de los campeones (carpeta "data")*/ ) {
 
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);  // Se declara un índice que se utilizará para mostrar las fotos de los campeones.
 
   function handleNext() {
     setIndex(index + 1);
-    index === ChampionsList.length - 1 ? setIndex(0) : setIndex(index + 1);
+    // Si el índice es igual a la longitud del array - 1, se reinicia a 0. Si no, se incrementa en 1.
+    // Esto permite que al llegar a la última foto, si se vuelve a presionar el botón, se muestre la primera foto nuevamente:
+    index === ChampionsList.length - 1 ? setIndex(0) : setIndex(index + 1); 
   }
 
   function handlePrevious() {
     setIndex(index - 1);
+    // Similar a lo descripto para el handleNext... en este caso, si el índice es 0, se reinicia a la última foto.
     index === 0 ? setIndex(ChampionsList.length - 1) : setIndex(index - 1);
   }
 
