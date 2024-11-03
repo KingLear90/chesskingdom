@@ -1,4 +1,5 @@
 import React from 'react';
+import './Logo.css';
 
  // Interfaz para especificar los props que espera el componente (para renderizar imagen principal)
  interface LogoProps {
@@ -6,7 +7,7 @@ import React from 'react';
     alt: string;
     width: string;
 }
-function Logo ({ src, alt, width } : LogoProps) {
+export const Logo = ({ src, alt, width } : LogoProps) => {
     return (
         <div className='logo'>
             <img src={src} alt={alt} width={width} />
@@ -14,5 +15,5 @@ function Logo ({ src, alt, width } : LogoProps) {
     );
 };
 
-export default Logo;
+
 

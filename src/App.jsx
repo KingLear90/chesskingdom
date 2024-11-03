@@ -1,7 +1,6 @@
 import './App.css';
 import './styles/Header.css';
 import './styles/Features.css';
-import './styles/Logo.css'
 import './styles/Footer.css';
 import './styles/Cards.css';
 import './styles/Home.css';
