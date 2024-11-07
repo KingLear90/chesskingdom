@@ -1,6 +1,5 @@
-import React from 'react';
-
-function Footer( ) {
+import './Footer.css'
+export default function Footer( ) {
     return (
         <footer className="foot">
           <div className='footer-info'>
@@ -17,5 +16,3 @@ function Footer( ) {
         </footer>
     )
 }
-
-export default Footer;

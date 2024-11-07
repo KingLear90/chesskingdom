@@ -1,4 +1,3 @@
-import React from 'react';
 import './Logo.css';
 
  // Interfaz para especificar los props que espera el componente (para renderizar imagen principal)
@@ -15,5 +14,6 @@ export const Logo = ({ src, alt, width } : LogoProps) => {
     );
 };
 
+export default Logo;
 
 

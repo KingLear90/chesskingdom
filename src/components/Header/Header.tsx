@@ -1,7 +1,10 @@
-import React from "react";
-import PropTypes from 'prop-types';
-
-function Header( {brandName, brandURL, navLinks} ) {
+import './Header.css'
+interface HeaderProps {
+    brandName: string;
+    brandURL: string;
+    navLinks: { name: string; url: string }[];
+}
+function Header( {brandName, brandURL, navLinks}: HeaderProps ) {
     return (
         <>
             <nav className="navbar navbar-expand-lg">
@@ -22,12 +25,6 @@ function Header( {brandName, brandURL, navLinks} ) {
         </>
     )
 
-}
-
-Header.propTypes = {    // Se definen las props que se espera recibir en cada propiedad.
-    brandName: PropTypes.string.isRequired,
-    brandURL: PropTypes.string.isRequired,
-    navLinks: PropTypes.array.isRequired,
 }
 
 export default Header;

@@ -1,7 +1,10 @@
-import App from '../App';
-import Cards from '../components/Cards';
-import BestMoveApi from '../components/BestMoveApi';
-import { cardsItems } from '../data/CardsItems';
+import App from '../../App';
+import './Learn.css';
+import Cards from '../../components/Cards/Cards';
+import BestMoveApi from '../../components/BestMoveApi/BestMoveApi';
+import { cardsItems } from '../../data/CardsItems';
+
+
 function Learn() {
   return (
     <App>

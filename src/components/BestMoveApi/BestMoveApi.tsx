@@ -1,3 +1,4 @@
+import './Learn.css';
 import { useState } from 'react';
 
 function BestMoveApi() {
@@ -7,15 +8,15 @@ function BestMoveApi() {
   El máximo es 18 (equivale a unos 2750 puntos elo FIDE), y por tanto el mejor valor */
   const depth = 18;
   const [loading, setLoading] = useState(false);
-  const [resultado, setResultado] = useState(null);
-  const [winChance, setWinChance] = useState(null);
+  const [resultado, setResultado] = useState<string | null>(null);
+  const [winChance, setWinChance] = useState(Number);
   const [interpretation, setInterpretation] = useState(false);
 
-  const handleFenChange = (event) => { 
+  const handleFenChange = (event: any) => { 
     setFen(event.target.value);   // Se actualiza el estado del FEN con el valor ingresado por el usuario.
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();       // Se previene el comportamiento por defecto del formulario.
     setLoading(true);             // Es un modo de avisar al usuario que se está procesando la solicitud.
 
@@ -41,7 +42,6 @@ function BestMoveApi() {
       setLoading(false);
     }
   };
-
   const handleInterpretation = () => {
     setInterpretation(!interpretation)  // Interpretation explica la respuesta de Stockfish. Por defecto el estado está en false.
   }

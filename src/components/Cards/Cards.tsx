@@ -1,20 +1,30 @@
 import { useState } from 'react';  
-import PropTypes from 'prop-types';
+import './Cards.css';
 
+interface CardProps {
+  cardData: {
+    id: number;
+    title: string;
+    src: string;
+    alt: string;
+    description: string;
+    imgSize: string;
+  };
+}
 
-function Cards( { cardsItems } ) {
+function Cards({ cardsItems }: { cardsItems: CardProps['cardData'][] }) {
   return (
     <>
       <div className='card-container'>
-        {cardsItems.map((card) => (       // Se mapea cardsItems generando una key para cada Card (función debajo)
-          <Card key={card.id} cardData={card}/> // "cardData" contiene toda la información total de cardsItems, que será parámetro de la función Card.
+        {cardsItems.map((card: CardProps['cardData']) => (
+          <Card key={card.id} cardData={card} />
         ))}
       </div>
     </>
   );
 } // Esta identificación de cada card con la key 'card.id' permite que la función isClicked se ejecute de a 1 card a la vez y no en todas al mismo tiempo.
 
-function Card({ cardData }) {
+function Card({ cardData } : CardProps) {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleCardClick = () => {
@@ -39,16 +49,4 @@ function Card({ cardData }) {
     </div>
   );
 }
-
-Cards.propTypes = {
-  cardsItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired,
-
-    })
-  ).isRequired,
-};
-
 export default Cards;

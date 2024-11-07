@@ -1,12 +1,14 @@
-import { React, useState } from 'react';
-import App from '../App';
+import App from '../../App';
+import './Contact.css';
+import { useState } from 'react';
+
 
 // El formulario aún no tiene validación alguna de datos, pero visualmente simula que ciertos campos son obligatorios. 
 function Contact() {
 
   const [thanks, setThanks] = useState(false) // Planteo variable de estado de tipo booleana para mostrar mensaje al recibir form.
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();           // Previniendo la recarga automática de la página al hacer submit.
     setThanks(true);                 // Cambia thanks de false a true, para permitir mensaje (VER FINAL DEL FORM)
     setTimeout(() => {

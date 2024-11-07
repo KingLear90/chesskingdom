@@ -1,7 +1,19 @@
+import './Campeones';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
-function Campeones( {ChampionsList} /* Se recibe el array de objetos de los campeones (carpeta "data")*/ ) {
+interface ChampionsProps {
+  champions: { 
+    id: string; 
+    nombre: string;
+    src: string; 
+    width: number;
+    height: number;
+    alt: string;
+    className: string;
+  } [];
+}
+
+function Campeones( { champions } : ChampionsProps ) {
 
   const [index, setIndex] = useState(0);  // Se declara un índice que se utilizará para mostrar las fotos de los campeones.
 
@@ -9,16 +21,16 @@ function Campeones( {ChampionsList} /* Se recibe el array de objetos de los camp
     setIndex(index + 1);
     // Si el índice es igual a la longitud del array - 1, se reinicia a 0. Si no, se incrementa en 1.
     // Esto permite que al llegar a la última foto, si se vuelve a presionar el botón, se muestre la primera foto nuevamente:
-    index === ChampionsList.length - 1 ? setIndex(0) : setIndex(index + 1); 
+    index === champions.length - 1 ? setIndex(0) : setIndex(index + 1); 
   }
 
   function handlePrevious() {
     setIndex(index - 1);
     // Similar a lo descripto para el handleNext... en este caso, si el índice es 0, se reinicia a la última foto.
-    index === 0 ? setIndex(ChampionsList.length - 1) : setIndex(index - 1);
+    index === 0 ? setIndex(champions.length - 1) : setIndex(index - 1);
   }
 
-  let campeon = ChampionsList[index];
+  let campeon = champions[index];
 
   return (
     <div>
@@ -36,18 +48,6 @@ function Campeones( {ChampionsList} /* Se recibe el array de objetos de los camp
       </div>
     </div>
       )
-}
-
-Campeones.propTypes = {
-  ChampionsList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-      alt: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 }
 
 export default Campeones
