@@ -1,7 +1,7 @@
 import App from '../../App';
 import './Gallery'
 import { ChampionsList } from '../../data/ChampionsList';
-import Campeones from '../../components/Campeones/Campeones';
+import Campeones from '../../components/Champions/Champions';
 import ChampsApi from '../../components/ChampsApi/ChampsApi';
 function Gallery() {
 

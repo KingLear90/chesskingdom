@@ -1,6 +1,6 @@
 import './Logo.css';
 
- // Interfaz para especificar los props que espera el componente (para renderizar imagen principal)
+ // Interfaz para el Logo principal del sitio
  interface LogoProps {
     src: string;
     alt: string;

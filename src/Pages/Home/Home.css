@@ -71,7 +71,8 @@
 }
 
 .iframeTitle {
-    margin: 2em;
+    margin-top: 2.5em;
+    margin-bottom: 1em;
 }
 
 @media (min-width: 480px) {

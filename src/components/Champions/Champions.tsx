@@ -1,4 +1,4 @@
-import './Campeones';
+import './Champions';
 import { useState } from 'react';
 
 interface ChampionsProps {
