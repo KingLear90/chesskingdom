@@ -6,6 +6,7 @@ import { features } from '../../data/Features';
 import Events from '../../components/Events/Events';
 
 const eventOptions: JSX.Element[] = [
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/hfFEnFj2iVk?si=6R6a9LSm8geMPakd" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>,
   <iframe src="https://lichess.org/embed/broadcast/tcec-season-27--league-1/RWhNDLxC" className='iframeLichess' frameBorder="0"></iframe>,
   <iframe src="https://lichess.org/embed/broadcast/european-chess-club-cup--open/f7yEGk0O" className='iframeLichess' frameBorder="0"></iframe>,
   <iframe src="https://lichess.org/embed/broadcast/european-individual-chess-championship-2024--boards-1-64/NW5YDA3r" className='iframeLichess' frameBorder="0"></iframe>
