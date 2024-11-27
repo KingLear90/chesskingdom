@@ -4,12 +4,13 @@ import './Logo.css';
  interface LogoProps {
     src: string;
     alt: string;
-    width: string;
+    className: string;
 }
-export const Logo = ({ src, alt, width } : LogoProps) => {
+
+export const Logo = ({ src, alt, className } : LogoProps) => {
     return (
         <div className='logo'>
-            <img src={src} alt={alt} width={width} />
+            <img src={src} alt={alt} className={className} />
         </div>
     );
 };
