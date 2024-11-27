@@ -1,5 +1,4 @@
 .image-container {
-    width: 95%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +8,8 @@
 }
 
 .mainContain {
-    background: #d7ddde;
+    color: rgb(251, 255, 231);
+    background: #212020;
     width: 95%;
     align-items: center;
     margin-right: auto;
@@ -35,13 +35,13 @@
 
 @keyframes color {
     0% {
-        color: black;
+        color: #212020;
     }
     50% {
-        color: #2d8aed;
+        color: #187dea;
     }
     100% {
-        color: black;
+        color: #212020;
     }
 }
 
@@ -65,18 +65,57 @@
     line-height: 40px;
 }
 
+.importantTitle {
+    font-weight: bold;
+}
+
 .iframeLichess{
     width: 100%; 
     aspect-ratio: 2/4;
 }
 
-.iframeTitle {
-    margin-top: 2.5em;
-    margin-bottom: 1em;
+.wccIframe{
+    border: 3px solid red;
+    border-radius: 5px;
+    width: 100%; 
+    aspect-ratio: 5/4;
 }
 
-@media (min-width: 480px) {
+.iframeTitle {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    animation: colorTitle 3s infinite;
+}
+@keyframes colorTitle {
+    0% {
+        color: #dd4a4a;
+    }
+    50% {
+        color: #187dea;
+    }
+    100% {
+        color: #dd4a4a;
+    }
+}
 
+.novelties {
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+@media (min-width: 480px) {
     .image-container {
         width: 80%;
     }
