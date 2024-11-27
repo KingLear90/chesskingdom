@@ -16,6 +16,7 @@ function Contact() {
     }, 2000);                        // El mensaje dura 2 segundos y desaparece. 
   }
 
+  
   return (
     <App>
         <form className="formLayout" onSubmit={handleSubmit}>
