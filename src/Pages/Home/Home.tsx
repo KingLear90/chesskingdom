@@ -11,11 +11,10 @@ const eventOptions: JSX.Element[] = [
   <iframe src="https://lichess.org/embed/broadcast/european-individual-chess-championship-2024--boards-1-64/NW5YDA3r" className='iframeLichess' frameBorder="0"></iframe>
 ];
 
-
 const primaryEvent = () => {
   const date = new Date();
   const targetDate = new Date("2024-12-16T00:00:00");   // Fecha de finalización del World Chess Championship 2024
-  const randomEvent = () => Math.floor(eventOptions.length * Math.random());  // Elige un evento aleatorio de la lista y lo muestra
+  const randomEvent = () => Math.floor(Math.random() * eventOptions.length);  // Elige un evento aleatorio de la lista y lo muestra
 
   // Hasta que la fecha sea menor a la fecha objetivo (final del WCC 2024), se reproduce stream del WCC:
   return (
