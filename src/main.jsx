@@ -7,7 +7,9 @@ import Learn from './Pages/Learn/Learn';
 import Gallery from './Pages/Gallery/Gallery';
 import Contact from './Pages/Contact/Contact';
 import NotFound from './Pages/NotFound/NotFound';
-const router = createBrowserRouter([
+import SignUp from './Pages/SignUp/SignUp';
+import SignIn from './Pages/SignIn/SignIn';
+export const router = createBrowserRouter([
   {
     path: '*',
     element: <NotFound />,
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
   {
     path: '/contact',
     element: <Contact />
+  },
+  {
+    path: '/signup',
+    element: <SignUp />
+  },
+  {
+    path: '/signin',
+    element: <SignIn />
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
