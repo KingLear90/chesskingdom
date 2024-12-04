@@ -30,15 +30,6 @@ function Contact() {
             <label htmlFor="lastName">Apellido</label>
             <input type="text" name="lastName"  />
 
-            <label htmlFor="gender" className='gender'>Sexo</label>
-            <select name="gender" >
-              <option selected>Selecciona género</option>
-              <option value="M">Masculino</option>
-              <option value="F">Femenino</option>
-              <option value="NB">No Binario</option>
-              <option value="O">Otro</option>
-            </select>
-
             <label htmlFor="email">Correo electrónico *</label>
             <input type="email" name="email" />
 
