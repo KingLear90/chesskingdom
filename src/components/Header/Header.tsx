@@ -6,7 +6,7 @@ interface HeaderProps {
 }
 function Header( {brandName, brandURL, navLinks}: HeaderProps ) {
     return (
-        <>
+        <div className='navDisposition'>
             <nav className="navbar navbar-expand-lg">
                 <a href= {brandURL} className="navbar-brand">{brandName}</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@ function Header( {brandName, brandURL, navLinks}: HeaderProps ) {
                     </ul>
                 </div>
             </nav>
-        </>
+        </div>
     )
 
 }

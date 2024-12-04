@@ -18,9 +18,7 @@
 
 .nav-link {
     display: flex;
-    flex-direction: row-reverse;
-    gap: 2.5em;
-    margin-right: 0.8em;
+    margin-right: 2.8em;
     color: #ffffff;
     justify-content: space-evenly;
 }
