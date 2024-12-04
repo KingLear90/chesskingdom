@@ -7,9 +7,10 @@ interface FooterProps {
     img1: string | JSX.Element;
     link2: string;
     img2: string | JSX.Element;
+    parentMethod: () => void;
 }
 
-export default function Footer({ title, terminos, link1, img1, link2, img2 }: FooterProps) {
+export default function Footer({ title, terminos, link1, img1, link2, img2, parentMethod }: FooterProps) {
     return (
         <footer className="foot">
           <div className='footer-info'>
@@ -19,6 +20,7 @@ export default function Footer({ title, terminos, link1, img1, link2, img2 }: Fo
             <a href={link1}>{img1}</a> 
             <a href={link2}>{img2}</a>
           </div>
+          <div><button className='contact' onClick={parentMethod}>CONTACTO</button></div>
         </footer>
     )
 }
