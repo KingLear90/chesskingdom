@@ -17,6 +17,7 @@
     border-radius: 1%;
     margin-bottom: 2em;
     box-shadow: 2px 2px 0px 1px dimgrey;
+    padding-top: 0.5em;
 }
 
 .card-Descrip {
@@ -29,7 +30,7 @@
     margin-right: auto;
     width: 18rem;
     margin-top: 0.8em;
-    line-height: 1.3em;
+    line-height: 1.5em;
 }
 
 .learn-btn {
