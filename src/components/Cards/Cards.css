@@ -12,20 +12,24 @@
     align-items: center;
     margin-left:auto;
     margin-right: auto;
-    width: 17em;
-    height: 28.3rem;
+    width: 18em;
+    height: 60vh;
     border-radius: 1%;
     margin-bottom: 2em;
     box-shadow: 2px 2px 0px 1px dimgrey;
 }
 
 .card-Descrip {
+    display: flex;
     font-size: 1.1rem;
     font-weight: 400;
     font-style: 'Karla';
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
     width: 15rem;
-    margin: 1em 1em;
-    line-height: 1.2em;
+    margin-top: 0.8em;
+    line-height: 1.1em;
 }
 
 .learn-btn {
