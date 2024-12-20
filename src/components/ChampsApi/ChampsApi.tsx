@@ -47,8 +47,8 @@ function ChampsApi () {
 
     const handleMoreInfo = () => {
       champions
-      setStartingIndex(prev => prev + 3);
-      setEndingIndex(prev => prev + 3);
+      setStartingIndex(prev => prev + 3); // Se incrementa el índice inicial en 3.
+      setEndingIndex(prev => prev + 3); // Se incrementa el índice final en 3.
       if (endingIndex === champions.length) {
         setStartingIndex(0); // Para reiniciar el índice a 0 una vez llegado al final.
         setEndingIndex(3); // Idem, pero con índice final
