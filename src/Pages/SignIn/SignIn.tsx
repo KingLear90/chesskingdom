@@ -40,7 +40,7 @@ function SignIn() {
             {sesion && <h4 className='thanksMsg'>¡Disfruta el sitio!</h4>} 
         </form>
         <div>
-            <button className="btn btn-secondary" onClick={toSignUp}>O registrate</button>
+            <button className="btn btn-secondary" onClick={toSignUp}>Registrarse (GRATIS)</button>
         </div>
     </App>
   )
