@@ -31,7 +31,7 @@ function SignUp() {
             <label htmlFor="email">Correo electrónico *</label>
             <input type="email" name="email" /> 
 
-            <label htmlFor="password">Contraseña:</label>
+            <label htmlFor="password">Contraseña *</label>
             <input type="password" name="password" /> 
 
             <div className="formButtonContainer">
