@@ -1,34 +1,39 @@
 import './Learn.css';
 import { useState } from 'react';
+import { Chessboard } from 'react-chessboard';
+import { Chess } from 'chess.js'
 
 function BestMoveApi() {
   //Se declara un código FEN por defecto, para que el usuario pueda ver cómo lo analiza Stockfish, pero además por si no conoce cómo es un FEN.
-  const [fen, setFen] = useState('4r1n1/3p4/8/3K1Pp1/3P4/1R1B4/1P3k2/8 b - - 0 1'); 
-  /* La api permite setear la depth (profundidad) en la que el motor analiza la posición. 
-  El máximo es 18 (equivale a unos 2750 puntos elo FIDE), y por tanto el mejor valor */
-  const depth = 18;
+  const [chess] = useState(new Chess());
+  const [fen, setFen] = useState<string>(chess.fen());
+  const depth: number = 18;
   const [loading, setLoading] = useState(false);
-  const [resultado, setResultado] = useState<string | null>(null);
-  const [winChance, setWinChance] = useState(Number);
+  const [resultado, setResultado] = useState<string | null>();
+  const [winChance, setWinChance] = useState<number | undefined>();
   const [interpretation, setInterpretation] = useState(false);
 
-  const handleFenChange = (event: any) => { 
-    setFen(event.target.value);   // Se actualiza el estado del FEN con el valor ingresado por el usuario.
+  // Cuando se manejan eventos en React con Typescript, el tipo no puede ser, por ejempplo, un string, 
+  // sino un objeto de tipo React.ChangeEvent<ELEMENTO QUE SE USE>.
+  const handleFenChange = (event: React.ChangeEvent<HTMLInputElement>) => {   
+    const newFEN = event.target.value;   // Se actualiza el estado del FEN con el valor ingresado por el usuario.
+    setFen(newFEN)                       // FEN ahora corresponde al valor ingresado por el usuario.
+    chess.load(newFEN)                   // Se carga la nueva 'instancia de Chess' con el FEN proporcionado.
   };
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {  // Igual situación de evento en TS + React, pero con un evento tipo click.
     event.preventDefault();       // Se previene el comportamiento por defecto del formulario.
     setLoading(true);             // Es un modo de avisar al usuario que se está procesando la solicitud.
 
     try {   {/* Esta sería la solicitud POST a la API (se puede chusmear en chess-api.com) 
-      con el FEN ingresado por el usuario (o el que establecí por defecto si no ingresa alguno)*/}
+      con el FEN ingresado por el usuario */}
       const response = await fetch('https://chess-api.com/v1',
         {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ fen, depth }) // Solicitud según FEN y depth.
+            body: JSON.stringify({ fen, depth }) // Solicitud según FEN y depth (colocada por defecto en 18, la mejor opción que ofrece la API).
         });
 
       // Se espera la respuesta de la API y se actualiza el estado de resultado y winChance.
@@ -42,9 +47,30 @@ function BestMoveApi() {
       setLoading(false);
     }
   };
+
+  // Función para movimientos.  
+  const onDrop = (sourceSquare: string, targetSquare: string) => {
+
+    // Validación de movimientos (chess.js library)
+    const move = chess.move({
+        from: sourceSquare,   // Casilla de origen
+        to: targetSquare,     // Casilla destino
+        promotion: 'q'        // Promocionar a 'Reina'
+      });
+
+      // Si el movimiento es inválido, retorna Falso para ignorarlo.
+      if (move === null) {
+        return false;
+      }
+      // Si el movimiento es válido, se actualiza la posición con el mismo.
+      setFen(chess.fen());
+      return true; // Devuelve entonces un true
+    }
+  
   const handleInterpretation = () => {
     setInterpretation(!interpretation)  // Interpretation explica la respuesta de Stockfish. Por defecto el estado está en false.
   }
+
 
   return (
     <div>
@@ -57,11 +83,18 @@ function BestMoveApi() {
         <div className='engine-datacontainer'>
             <label className='code'>Código FEN: </label>
             <input type="text" className='fen' name='fen' value={fen} onChange={handleFenChange} placeholder="Ingresa el código FEN" />
+            <div id="chessboard-container">
+              <Chessboard
+                position={fen} 
+                onPieceDrop={onDrop}     
+                boardWidth={370}          
+              />
+            </div>
             <button onClick={handleSubmit} className='engine-btn'>¿Mejor movimiento?</button>
             {loading && <h4 className='calculating'>Calculando...</h4>}  {/* Avisa al usuario que se está procesando la solicitud. */}
             <div>
               {resultado && <p className='textAnalysis'>El mejor movimiento es: {resultado}</p>} 
-              {resultado && <p className='textAnalysis'> La probabilidad de victoria para las blancas es del {winChance.toFixed(2)}%</p>}
+              {resultado && winChance !== undefined && <p className='textAnalysis'> La probabilidad de victoria para las blancas es del {winChance.toFixed(2)}%</p>}
               {resultado && <h5 className='interpretation'>¿Cómo interpretar el resultado? 
                 <button onClick={handleInterpretation} className='interButton'>
                 {!interpretation ? <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 16" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="arrowDown"><path d="M15 6v6h4l-7 7-7-7h4V6h6z"/></svg> : 
@@ -82,6 +115,5 @@ function BestMoveApi() {
         </div>
     </div>
   );
-}
-
-export default BestMoveApi;
+  
+}export default BestMoveApi;
