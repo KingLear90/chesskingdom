@@ -39,6 +39,14 @@
     width: 18em;
 }
 
+.chessboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .engine-btn {
     border-radius: 10px;
     font-weight: 500;
