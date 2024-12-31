@@ -1,51 +1,64 @@
 import './Learn.css';
 import { useState } from 'react';
-import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js'
+import ChessboardInterface from '../ChessboardInterface/ChessboardInterface';
 
 function BestMoveApi() {
   //Se declara un código FEN por defecto, para que el usuario pueda ver cómo lo analiza Stockfish, pero además por si no conoce cómo es un FEN.
   const [chess] = useState(new Chess());
   const [fen, setFen] = useState<string>(chess.fen());
+  const [boardOrientation, setBoardOrientation] = useState<"white" | "black">("white");
   const depth: number = 18;
   const [loading, setLoading] = useState(false);
-  const [resultado, setResultado] = useState<string | null>();
+  const [resultado, setResultado] = useState<string>();
+  const [mate, setMate] = useState<string>();
   const [winChance, setWinChance] = useState<number | undefined>();
   const [interpretation, setInterpretation] = useState(false);
 
-  // Cuando se manejan eventos en React con Typescript, el tipo no puede ser, por ejempplo, un string, 
+  // Los eventos en React con Typescript, no pueden ser, por ejempplo, de tipo string, 
   // sino un objeto de tipo React.ChangeEvent<ELEMENTO QUE SE USE>.
   const handleFenChange = (event: React.ChangeEvent<HTMLInputElement>) => {   
     const newFEN = event.target.value;   // Se actualiza el estado del FEN con el valor ingresado por el usuario.
-    setFen(newFEN)                       // FEN ahora corresponde al valor ingresado por el usuario.
-    chess.load(newFEN)                   // Se carga la nueva 'instancia de Chess' con el FEN proporcionado.
+    setFen(newFEN)                    
+    chess.load(newFEN)                   // Se carga la nueva instancia de Chess con el FEN proporcionado.
   };
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {  // Igual situación de evento en TS + React, pero con un evento tipo click.
-    event.preventDefault();       // Se previene el comportamiento por defecto del formulario.
-    setLoading(true);             // Es un modo de avisar al usuario que se está procesando la solicitud.
+    event.preventDefault();  
+    setLoading(true);             // Avisa al usuario que se está procesando la solicitud.
 
-    try {   {/* Esta sería la solicitud POST a la API (se puede chusmear en chess-api.com) 
-      con el FEN ingresado por el usuario */}
-      const response = await fetch('https://chess-api.com/v1',
-        {
-            method: 'POST',
-            headers: {
+    try {   {/* Esta sería la solicitud POST a la API (se puede chusmear en chess-api.com) con el FEN ingresado por el usuario */}
+        const response = await fetch('https://chess-api.com/v1', {
+          method: 'POST',
+          headers: {
             'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ fen, depth }) // Solicitud según FEN y depth (colocada por defecto en 18, la mejor opción que ofrece la API).
+          },
+          body: JSON.stringify({ fen, depth }) // Solicitud según FEN y depth (colocada por defecto en 18, la mejor opción que ofrece la API).
         });
 
-      // Se espera la respuesta de la API y se actualiza el estado de resultado y winChance.
-      const data = await response.json();
-      setResultado(data.text);  // Data.text no solo contiene el mejor movimiento sino una descripción del balance de la posición.
-      setWinChance(data.winChance);
-    } catch (error) {
-      console.error(error);
-      setResultado('Error al obtener el mejor movimiento');
-    } finally {
-      setLoading(false);
-    }
+        const data = await response.json();
+
+        let result = data.text;
+        if (result.includes('White is winning')) {
+          result = result.replace('White is winning. Depth', 'Las blancas están ganando. Profundidad ');
+        } else if (result.includes('Black is winning')) {
+          result = result.replace('Black is winning. Depth ', 'Las negras están ganando. Profundidad ');
+        } else if (result.includes('The game is balanced')) {
+          result = result.replace('The game is balanced. Depth ', 'La posición está equilibrada. Profundidad ');
+        } 
+        setResultado(result);
+
+        const mate = data.mate;
+        setMate(mate);
+
+        setWinChance(data.winChance);
+
+      } catch (error) {
+        console.error(error);
+        setResultado('Error al obtener el mejor movimiento');
+      } finally {
+        setLoading(false);
+      }
   };
 
   // Función para movimientos.  
@@ -62,8 +75,8 @@ function BestMoveApi() {
       if (move === null) {
         return false;
       }
-      // Si el movimiento es válido, se actualiza la posición con el mismo.
-      setFen(chess.fen());
+
+      setFen(chess.fen());  // Actualiza el FEN cuando el movimiento es válido.
       return true; // Devuelve entonces un true
     }
   
@@ -71,6 +84,9 @@ function BestMoveApi() {
     setInterpretation(!interpretation)  // Interpretation explica la respuesta de Stockfish. Por defecto el estado está en false.
   }
 
+  const toggleBoardOrientation = () => {
+    setBoardOrientation(boardOrientation === 'white' ? 'black' : 'white');
+  };
 
   return (
     <div>
@@ -84,16 +100,31 @@ function BestMoveApi() {
             <label className='code'>Código FEN: </label>
             <input type="text" className='fen' name='fen' value={fen} onChange={handleFenChange} placeholder="Ingresa el código FEN" />
             <div id="chessboard-container">
-              <Chessboard
-                position={fen} 
-                onPieceDrop={onDrop}     
-                boardWidth={370}          
+              <ChessboardInterface 
+                fen={fen}
+                onDrop={onDrop}
+                boardOrientation={boardOrientation}
               />
+            <button 
+              className="btn btn-primary m-2 px-2" 
+              onClick={() => {
+                chess.reset();
+                setFen(chess.fen());
+              }}>
+              Posición inicial ♖♘♗
+            </button>
+            <button 
+              className='btn btn-dark m-3 px-2' 
+              onClick={toggleBoardOrientation}>
+              Girar tablero 🔁
+            </button>
             </div>
-            <button onClick={handleSubmit} className='engine-btn'>¿Mejor movimiento?</button>
+            <button onClick={handleSubmit} className='btn btn-primary m-3'>¿Mejor movimiento?</button>
+
             {loading && <h4 className='calculating'>Calculando...</h4>}  {/* Avisa al usuario que se está procesando la solicitud. */}
             <div>
               {resultado && <p className='textAnalysis'>El mejor movimiento es: {resultado}</p>} 
+              {mate && <p className='textAnalysis'>Mate en {mate} movimientos</p>}
               {resultado && winChance !== undefined && <p className='textAnalysis'> La probabilidad de victoria para las blancas es del {winChance.toFixed(2)}%</p>}
               {resultado && <h5 className='interpretation'>¿Cómo interpretar el resultado? 
                 <button onClick={handleInterpretation} className='interButton'>
@@ -103,10 +134,10 @@ function BestMoveApi() {
               {interpretation && <h6> {/* Si interpretation es true, entonces... */}
                   <ul className='list-interpretation'>
                       <li>"Move <i><b>x</b></i> → <i><b>z</b></i> " expresa que la pieza ubicada en la casilla 'x' debe moverse a la casilla 'z'.</li>
-                      <li>(g4), por ejemplo, indica lo mismo que el punto anterior, pero en notación algebraica (en este caso, equivale al movimiento del peón en g5 hacia g4).</li>
+                      <li>Lo siguiente indica lo mismo que el punto anterior, pero en notación algebraica (Si, por ejemplo, se indica 'Move g5 → g4', luego se especifica (g4), que equivale al mismo movimiento: la pieza en cuestión hacia g4).</li>
                       <li>El siguiente valor, ubicado entre corchetes, indica la evaluación de la posición . Un valor negativo indica que la ventaja es para las negras.</li>
-                      <li>Lo siguiente es un breve texto, indicando si están ganando las blancas ('white is winning'), las negras ('black is winning'), o si la posición está equilibrada ('the game is balanced').</li>
-                      <li>Por último, puede verse la profundidad de análisis de Stockfish, que en este caso será siempre 18.</li>
+                      <li>Por último, puede verse la profundidad del análisis de Stockfish (máximo 18, equivalente a 2750 puntos FIDE).</li>
+                      <li>Si hay posibilidad de mate en la posición, se especifica en cuántas jugadas.</li>
                       <li>En el último recuadro aparece la probabilidad de uno u otro bando para ganar. Si el porcentaje es cercano al 50% signfica que la posición está equilibrada. Por encima del 50%, las chances incrementan para las blancas, por debajo de dicho valor, aumentan para las negras.</li>
                   </ul>       
                 </h6> 
@@ -116,4 +147,6 @@ function BestMoveApi() {
     </div>
   );
   
-}export default BestMoveApi;
+}
+
+export default BestMoveApi;
