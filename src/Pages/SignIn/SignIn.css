@@ -1,9 +1,11 @@
-.formLayout {
+ .formLayout {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 1em auto;
+    min-height: 10vh;
+    width: 100%;
+    margin: 7em auto;
 }
 
 .alert {
@@ -13,13 +15,16 @@
     margin: 0;
 }
 
-
 input, select, textarea, .form-select {
     border: 1px solid black;
     border-radius: 0.4em;
     width: 18.7em;
     margin: 0.2em auto;
     text-align: center;
+}
+
+footer {
+    min-height: 1vh;
 }
 
 select {
