@@ -23,15 +23,9 @@
 
 .footer-links{
     font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
-    font-size: 13px;
+    font-size: 1em;
     display:flex;
     flex-direction: column;
-}
-
-.rights {
-    text-decoration: none;
-    font-weight: bold;
-    color: #000;
 }
 
 .contact {
@@ -40,6 +34,6 @@
     font-weight: bold;
 }
 
-.contact:hover, .rights:hover {
+.contact:hover {
     color: #fff;
 }   
