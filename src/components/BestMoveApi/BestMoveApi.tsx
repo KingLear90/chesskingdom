@@ -39,14 +39,26 @@ function BestMoveApi() {
         const data = await response.json();
 
         let result = data.text;
-        if (result.includes('White is winning')) {
-          result = result.replace('White is winning. Depth', 'Las blancas están ganando. Profundidad ');
-        } else if (result.includes('Black is winning')) {
-          result = result.replace('Black is winning. Depth ', 'Las negras están ganando. Profundidad ');
-        } else if (result.includes('The game is balanced')) {
-          result = result.replace('The game is balanced. Depth ', 'La posición está equilibrada. Profundidad ');
+        if (result.includes(")")) {
+          result = result.replace(")", '');
         } 
-        setResultado(result);
+        if (result.includes(":")) {
+          result = result.replace(":", '');
+        }
+        if (result.includes("Depth")) {
+          result = result.replace("Depth", 'Profundidad');
+        }
+        if (result.includes("The game is balanced.")) {
+            result = result.replace("The game is balanced.", '');
+        }
+        if (result.includes("White is winning.")) {
+          result = result.replace("White is winning.", '');
+        }
+        if (result.includes("Black is winning.")) {
+        result = result.replace("Black is winning.", '');
+        }
+      
+        setResultado(result.slice(14,45));
 
         const mate = data.mate;
         setMate(mate);
@@ -94,19 +106,19 @@ function BestMoveApi() {
         <h5>¿Cómo funciona? Es simple: </h5>
         <ol className='instructions'>
             <li>Ingresa el código FEN de la posición a analizar. Por defecto ya hay un FEN escrito para que veas el formato.</li>
-            <li>Haz clic en el botón <i>'¿Mejor movimiento?</i>' y espera la respuesta de Stockfish (la demora es de tan solo milisegundos, y Stockfish analizará en profunidad 18, que es la máxima permitida en esta función y que equivale a unos 2750 puntos elo FIDE).</li>
+            <li>Haz clic en <i>'¿Mejor movimiento?'</i> y espera la respuesta de Stockfish.</li>
         </ol>
         <div className='engine-datacontainer'>
             <label className='code'>Código FEN: </label>
             <input type="text" className='fen' name='fen' value={fen} onChange={handleFenChange} placeholder="Ingresa el código FEN" />
-            <div id="chessboard-container">
+            <div id="chessboard-container" className='mt-4'>
               <ChessboardInterface 
                 fen={fen}
                 onDrop={onDrop}
                 boardOrientation={boardOrientation}
               />
             <button 
-              className="btn btn-primary m-2 px-2" 
+              className="btn btn-primary mt-4 mx-3 px-2" 
               onClick={() => {
                 chess.reset();
                 setFen(chess.fen());
@@ -114,17 +126,17 @@ function BestMoveApi() {
               Posición inicial ♖♘♗
             </button>
             <button 
-              className='btn btn-dark m-3 px-2' 
+              className='btn btn-dark mt-4 mx-3 px-2' 
               onClick={toggleBoardOrientation}>
               Girar tablero 🔁
             </button>
             </div>
-            <button onClick={handleSubmit} className='btn btn-primary m-3'>¿Mejor movimiento?</button>
+            <button onClick={handleSubmit} className='btn btn-link m-3' style={{fontWeight:'bolder'}}>¿Mejor movimiento?</button>
 
             {loading && <h4 className='calculating'>Calculando...</h4>}  {/* Avisa al usuario que se está procesando la solicitud. */}
             <div>
               {resultado && <p className='textAnalysis'>El mejor movimiento es: {resultado}</p>} 
-              {mate && <p className='textAnalysis'>Mate en {mate} movimientos</p>}
+              {mate && <p className='textAnalysis'>Mate en {mate}</p>}
               {resultado && winChance !== undefined && <p className='textAnalysis'> La probabilidad de victoria para las blancas es del {winChance.toFixed(2)}%</p>}
               {resultado && <h5 className='interpretation'>¿Cómo interpretar el resultado? 
                 <button onClick={handleInterpretation} className='interButton'>
@@ -133,11 +145,10 @@ function BestMoveApi() {
                 </button> </h5>}
               {interpretation && <h6> {/* Si interpretation es true, entonces... */}
                   <ul className='list-interpretation'>
-                      <li>"Move <i><b>x</b></i> → <i><b>z</b></i> " expresa que la pieza ubicada en la casilla 'x' debe moverse a la casilla 'z'.</li>
-                      <li>Lo siguiente indica lo mismo que el punto anterior, pero en notación algebraica (Si, por ejemplo, se indica 'Move g5 → g4', luego se especifica (g4), que equivale al mismo movimiento: la pieza en cuestión hacia g4).</li>
+                      <li>Primero se indica en notación algebraica la mejor jugada en la posición.</li>
                       <li>El siguiente valor, ubicado entre corchetes, indica la evaluación de la posición . Un valor negativo indica que la ventaja es para las negras.</li>
                       <li>Por último, puede verse la profundidad del análisis de Stockfish (máximo 18, equivalente a 2750 puntos FIDE).</li>
-                      <li>Si hay posibilidad de mate en la posición, se especifica en cuántas jugadas.</li>
+                      <li>Si hay posibilidad de mate en la posición, se especifica en cuántas jugadas (si el número de jugadas es negativo, significa que son las negras quienes pueden dar mate).</li>
                       <li>En el último recuadro aparece la probabilidad de uno u otro bando para ganar. Si el porcentaje es cercano al 50% signfica que la posición está equilibrada. Por encima del 50%, las chances incrementan para las blancas, por debajo de dicho valor, aumentan para las negras.</li>
                   </ul>       
                 </h6> 
