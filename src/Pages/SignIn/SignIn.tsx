@@ -16,28 +16,40 @@ function SignIn() {
    navigate('/signup')
   }
 
-  fetch("http://localhost:3000/api/user/get")
-  .then(res => res.json())
-  .then(data => console.log(data)) 
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:3001/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+      },
+        body: JSON.stringify(form)
+    })
 
- 
+    if (response.ok) {      // Pregunta para saber si la respuesta llegó bien.
+      const data = await response.json();     // Si salió bien, vamos a tener una response.json y lo pasamos a una constante para poder utilizarla. 
+      localStorage.setItem('token', data.token);
+      console.log(data);
+    } else {
+      throw new Error('Alguno de los datos es inválido.');
+    }
+    }catch (error: string | any) {
+      console.error(error.message);
+    }
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();         
     setSesion(true);                 // Cambia SESION de false a true, para permitir mensaje.
     setTimeout(() => {
       setSesion(false);
-    }, 2000);                        // El mensaje dura 2 segundos y desaparece. 
+    }, 2000); 
   }
-
-
   
   return (
     <App>
-        <form className="formLayout" onSubmit={handleSubmit}>
+        <form className="formLayout" onSubmit={handleLogin}>
             <h4 className="formTitle">Iniciar sesión:</h4>
 
-            <label htmlFor="email">Usuario (correo electrónico):</label>
+            <label htmlFor="email">Email  :</label>
             <input type="email" name="email" required 
             value={form.email} onChange={e => setForm(prevForm => ({ ...prevForm, email: e.target.value }))} />   
 
@@ -49,7 +61,7 @@ function SignIn() {
               <button type="submit" className="btn btn-success py-2">ACCEDER</button>
             </div>
             {/* Como REGISTRO es true, se muestra el mensaje de confirmación */}
-            {sesion && <h4 className='thanksMsg'>¡Disfruta el sitio!</h4>} 
+            {sesion && <h4 className='thanksMsg'>¡Bienvenido!</h4>} 
             <div>
             <button className="btn btn-primary py-2" onClick={toSignUp}>REGISTRARSE (GRATIS)</button>
         </div>
