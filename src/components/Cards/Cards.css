@@ -1,22 +1,30 @@
 .card-container {
     display: flex;
     flex-direction: column;
+    width: 85%;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .imgs {
-    height: 12em;
+    height: 120px;
+    width: 250px;
 }
 
 .cardItem {
+    display:flex;
+    flex-direction: column;
     background: linear-gradient(180deg,#648de1, #ffffff);
     align-items: center;
     margin-left:auto;
     margin-right: auto;
-    width: 19.5rem;
-    height: 27.4em;
-    border-radius: 1%;
+    width: 250px;
+    height: 360px;
+    row-gap: em;
+    border-radius: 8px;
     margin-bottom: 2em;
-    box-shadow: 2px 2px 0px 1px dimgrey;
+    box-shadow: 2px 2px 8px 1px dimgrey;
     padding-top: 0.5em;
 }
 
@@ -28,9 +36,9 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    width: 18rem;
+    width: 250px;
     margin-top: 0.8em;
-    line-height: 1.4em;
+    padding: 0 3px;
 }
 
 .learn-btn {

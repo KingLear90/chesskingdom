@@ -34,18 +34,20 @@ function Card({ cardData } : CardProps) {
 
   return (
     <div className='cardItem' key={cardData.id}>  {/* La clave del mapeo anterior: cada key permite identificar cada card de forma única */}
-      <h5>{cardData.title}</h5>
-      <img
-        className='imgs'
-        src={cardData.src}
-        alt={cardData.alt}
-        width={cardData.imgSize}
-      />
-      <p className='card-Descrip'>{cardData.description}</p>
-      <button className='learn-btn' onClick={handleCardClick}>
-        CONOCER MÁS
-      </button>
-      {isClicked && <h4 className='unavailable'>Sección disponible en breve...</h4>}  {/* Entonces isClicked funciona de a una card a la vez */}
+        <div className='card-content'>
+          <h5>{cardData.title}</h5>
+          <img
+            className='imgs'
+            src={cardData.src}
+            alt={cardData.alt}
+            width={cardData.imgSize}
+          />
+          <p className='card-Descrip'>{cardData.description}</p>
+          <button className='learn-btn' onClick={handleCardClick}>
+            CONOCER MÁS
+          </button>
+          {isClicked && <h4 className='unavailable'>Sección disponible en breve...</h4>} 
+        </div>  
     </div>
   );
 }

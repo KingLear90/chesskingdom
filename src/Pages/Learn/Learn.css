@@ -3,6 +3,7 @@
     font-size: 1em;
     margin: 1.5em auto;
     line-height: 1.5em;
+    align-items: center;
 }
 
 .engineFeature {
@@ -87,8 +88,9 @@
 }
 
 .unavailable { 
-    color: #0d6931f2;
-    font-weight: 700;
+    color: #e70c0cf2;
+    font-weight: 500;
+    font-size: 2px;
     font-family: 'Nunito', sans-serif;
     margin-top: 0.5em;
     animation-name: change-size;

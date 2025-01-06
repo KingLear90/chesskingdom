@@ -111,27 +111,39 @@ function BestMoveApi() {
         <div className='engine-datacontainer'>
             <label className='code'>Código FEN: </label>
             <input type="text" className='fen' name='fen' value={fen} onChange={handleFenChange} placeholder="Ingresa el código FEN" />
-            <div id="chessboard-container" className='mt-4'>
+            <div className="board-controls-container mt-4">
+            <div id="chessboard-container" className='mt-2'>
               <ChessboardInterface 
                 fen={fen}
                 onDrop={onDrop}
                 boardOrientation={boardOrientation}
               />
-            <button 
-              className="btn btn-primary mt-4 mx-3 px-2" 
-              onClick={() => {
-                chess.reset();
-                setFen(chess.fen());
-              }}>
-              Posición inicial ♖♘♗
-            </button>
-            <button 
-              className='btn btn-dark mt-4 mx-3 px-2' 
-              onClick={toggleBoardOrientation}>
-              Girar tablero 🔁
-            </button>
             </div>
-            <button onClick={handleSubmit} className='btn btn-link m-3' style={{fontWeight:'bolder'}}>¿Mejor movimiento?</button>
+            <div className='boardBtns'>
+              <button 
+                className="startBtn" 
+                onClick={() => {
+                  chess.reset();
+                  setFen(chess.fen());
+                }}>
+                Posición inicial ♖♘♗
+              </button>
+              <button 
+                className='flipBtn' 
+                onClick={toggleBoardOrientation}>
+                Girar tablero 🔁
+              </button>
+              <button 
+                className='undoBtn' 
+                onClick={() => { chess.undo()
+                  setFen(chess.fen())
+                }}>
+                Deshacer ↩
+              </button>
+            </div>
+          </div>
+        </div>
+            <button onClick={handleSubmit} className='btn btn-link mb-3' style={{fontWeight:'bolder'}}>¿Mejor movimiento?</button>
 
             {loading && <h4 className='calculating'>Calculando...</h4>}  {/* Avisa al usuario que se está procesando la solicitud. */}
             <div>
@@ -155,7 +167,6 @@ function BestMoveApi() {
               }
             </div>
         </div>
-    </div>
   );
   
 }

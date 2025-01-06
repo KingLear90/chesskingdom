@@ -47,6 +47,24 @@
     margin-right: auto;
 }
 
+.board-controls-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    margin-right: 13em;
+    margin-bottom: 1em;
+}
+
+.boardBtns {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
+}
+
 .engine-btn {
     border-radius: 10px;
     font-weight: 500;
@@ -54,6 +72,19 @@
     color: white;
     padding: 0.3em 0.7em;
     margin: 0.8em;
+}
+
+.startBtn, .flipBtn, .undoBtn {
+    border-radius: 5px;
+    font-weight: 400;
+    background: #1a1e22;
+    color: white;
+    padding: 0.3em 0.7em;
+    margin: 0.8em;
+}
+
+.startBtn:hover, .flipBtn:hover, .undoBtn:hover {
+    background: #76a4e8;
 }
 
 .engine-btn:hover {

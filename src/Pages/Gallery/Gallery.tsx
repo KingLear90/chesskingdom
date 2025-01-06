@@ -3,6 +3,7 @@ import './Gallery'
 import { ChampionsList } from '../../data/ChampionsList';
 import Campeones from '../../components/Champions/Champions';
 import ChampsApi from '../../components/ChampsApi/ChampsApi';
+import MatePractice from '../../components/Training/Training';
 function Gallery() {
 
   return (
@@ -17,6 +18,7 @@ function Gallery() {
           </div> 
         </div>
       </div>
+      <MatePractice />
     </App>
   )
 }

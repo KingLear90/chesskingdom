@@ -5,7 +5,7 @@ export const cardsItems = [
         src: './img/fundamentos.png',
         alt: 'Un rey, una reina y un peón, apoyados sobre las letras mayúsculas A, B y C respectivamente.',
         imgSize: "100%",
-        description: 'Aprende las leyes y reglas básicas, sus principios estratégicos fundamentales y todo lo necesario para comenzar a conocer el ajedrez.',
+        description: 'Aprende las reglas básicas, sus principios estratégicos y todo lo necesario para comenzar a conocer el ajedrez.',
     },
     {
         id: 'card2',
@@ -13,7 +13,7 @@ export const cardsItems = [
         src: './img/glass-pieces.jpg',
         alt: 'Piezas de ajedrez en material de vidrio.',
         imgSize: "100%",
-        description: 'Explora los principios teóricos que dominan las fases más determinantes en torno al medio-juego: las aperturas y los diversos finales.',
+        description: 'Explora los principios teóricos que dominan las fases más determinantes en torno al medio-juego: aperturas y finales.',
     },
     {
         id: 'card3',
